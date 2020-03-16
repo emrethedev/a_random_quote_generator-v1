@@ -10,6 +10,7 @@ project 1 - A Random Quote Generator
 /*** 
  * `quotes` array 
 ***/
+// Quotes
 let quotes = [];
 quotes = [
     {
@@ -40,10 +41,7 @@ quotes = [
         source: "source_e",
     },
 ];
-// console.log(quotes);
-// console.log(quotes[0]);
-// console.log(quotes[2]);
-// console.log(quotes.length);
+
 /***
  * `getRandomQuote` function
 ***/
@@ -51,13 +49,12 @@ quotes = [
 const getRandomQuote = () => {
     // Generates a random number from 0 to quotes.length (which was 5) -- rounded down with floor to reach 0
     let ranNumGen = Math.floor(Math.random() * quotes.length);
+
     // Returns a random quote object from the array -- i.e quotes[2] = B
     return quotes[ranNumGen];
 };
 
-console.log(getRandomQuote());
-
-// Picked colors that may compliment to existing color palette and design, instead of generating truly random colors with RBG
+// Colors that may compliment to existing color palette and design, instead of generating truly random colors with RBG
 let pickedColors = [
     {
       color: "#F83839",
@@ -87,18 +84,13 @@ let pickedColors = [
       color: "#AB0552",
     },
 ];
-console.log(pickedColors);
-console.log(pickedColors.length);
 
-// color generation function
+// Random color generation function
 const randColorGen = ( ) => {
     let colorGen = Math.floor(Math.random() * pickedColors.length);
-    return document.querySelector("body").style.backgroundColor = pickedColors[colorGen].color;
+    document.querySelector("body").style.backgroundColor = pickedColors[colorGen].color;
 };
 
-let autoQuote = () => {
-    setInterval(printQuote, 3000);
-};
 /***
  * `printQuote` function
 ***/
@@ -117,13 +109,15 @@ const printQuote = () => {
         quoteMsg += `<span class="tags"> Quote Type: ${pullRandQuote.tags}</span>`;
     }
     quoteMsg += `</p>`;
-    console.log(quoteMsg);
+
     // Background color changes to a pre-determined random color each time the quote refreshes
     randColorGen();
-    // autoQuote();
+
+    // Gets the element "quote-box" and changes its innerHTML value to the message (quoteMsg) we built above
     document.getElementById("quote-box").innerHTML = quoteMsg;
 };
-// Calling the printQuote function so we can generate a new quote before user clicks on button
+
+// Calling the printQuote function so we can generate a new quote before user clicks button
 printQuote();
 
 // Refreshing the quotes every 10 seconds by calling the printQuote function
