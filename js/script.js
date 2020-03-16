@@ -10,6 +10,7 @@ project 1 - A Random Quote Generator
 /*** 
  * `quotes` array 
 ***/
+
 // Quotes
 let quotes = [];
 quotes = [
@@ -47,6 +48,7 @@ quotes = [
 ***/
 
 const getRandomQuote = () => {
+
     // Generates a random number from 0 to quotes.length (which was 5) -- rounded down with floor to reach 0
     let ranNumGen = Math.floor(Math.random() * quotes.length);
 
@@ -87,7 +89,11 @@ let pickedColors = [
 
 // Random color generation function
 const randColorGen = ( ) => {
+
+    // Generating a random number and assigning it to colorGen to use later
     let colorGen = Math.floor(Math.random() * pickedColors.length);
+
+    // Selecting the body tag and manipulating its background
     document.querySelector("body").style.backgroundColor = pickedColors[colorGen].color;
 };
 
@@ -96,11 +102,15 @@ const randColorGen = ( ) => {
 ***/
 
 const printQuote = () => {
+
     // Calls getRandomQuote function
     let pullRandQuote = getRandomQuote();
+
+    // Building the essential messages each quote must have
     let quoteMsg = `<p class="quote"> A random quote: ${pullRandQuote.quote} </p>
-<p class="source"> Quote Source: ${pullRandQuote.source} |
-    `;
+                    <p class="source"> Quote Source: ${pullRandQuote.source} `;
+
+    // Checking to see if additional values exist so they could be added to the message, as well                
     if ( pullRandQuote.citation ) {
         quoteMsg += `<span class="citation"> Quote Citation: ${pullRandQuote.citation} |</span>`;
     } if ( pullRandQuote.year ) {
@@ -108,7 +118,10 @@ const printQuote = () => {
     } if ( pullRandQuote.tags ) {
         quoteMsg += `<span class="tags"> Quote Type: ${pullRandQuote.tags}</span>`;
     }
+    
+    // Closing the paragraph tag since quoteMsg variable has been constructed completely at this point
     quoteMsg += `</p>`;
+
 
     // Background color changes to a pre-determined random color each time the quote refreshes
     randColorGen();
