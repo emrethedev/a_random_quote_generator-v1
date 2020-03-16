@@ -15,31 +15,32 @@ project 1 - A Random Quote Generator
 let quotes = [];
 quotes = [
     {
-        quote: "A",
-        source: "source_a",
-        citation: "cite_a",
+        quote: "Roads? Where we're going we don't need roads",
+        source: "Dr. Emmet Brown",
+        citation: "Back to the Future",
     },
 
     {
-        quote: "B",
-        source: "source_b",
-        year: 1990,
+        quote: "Just keep swimming.",
+        source: "Dory",
+        year: 2003,
     },
 
     {
-        quote: "C",
-        source: "source_c",
-        tags: "business",
+        quote: "Nothing is impossible, the word itself says 'I'm possible'!",
+        source: "Audrey Hepburn",
+        tags: "motivational",
     },
 
     {
-        quote: "D",
-        source: "source_d",
+        quote: "Someone else's success does not equal a failure for you",
+        source: "Joe Rogan",
+        tags: "motivational",
     },
 
     {
-        quote: "E",
-        source: "source_e",
+        quote: "Apparently there is nothing that cannot happen today.",
+        source: "Mark Twain",
     },
 ];
 
@@ -107,18 +108,18 @@ const printQuote = () => {
     let pullRandQuote = getRandomQuote();
 
     // Building the essential messages each quote must have
-    let quoteMsg = `<p class="quote"> A random quote: ${pullRandQuote.quote} </p>
-                    <p class="source"> Quote Source: ${pullRandQuote.source} `;
+    let quoteMsg = `<p class="quote">${pullRandQuote.quote}</p>
+                    <p class="source">${pullRandQuote.source}`;
 
     // Checking to see if additional values exist so they could be added to the message, as well                
     if ( pullRandQuote.citation ) {
-        quoteMsg += `<span class="citation"> Quote Citation: ${pullRandQuote.citation} |</span>`;
+        quoteMsg += `<span class="citation">${pullRandQuote.citation}</span>`;
     } if ( pullRandQuote.year ) {
-        quoteMsg += `<span class="year"> Quote Year: ${pullRandQuote.year} |</span>`;
+        quoteMsg += `<span class="year">${pullRandQuote.year}</span>`;
     } if ( pullRandQuote.tags ) {
-        quoteMsg += `<span class="tags"> Quote Type: ${pullRandQuote.tags}</span>`;
+        quoteMsg += `<span class="tags"> (${pullRandQuote.tags})</span>`;
     }
-    
+
     // Closing the paragraph tag since quoteMsg variable has been constructed completely at this point
     quoteMsg += `</p>`;
 
