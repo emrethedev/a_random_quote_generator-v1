@@ -10,7 +10,6 @@ project 1 - A Random Quote Generator
 /*** 
  * `quotes` array 
 ***/
-
 let quotes = [];
 quotes = [
     {
@@ -28,6 +27,7 @@ quotes = [
     {
         quote: "C",
         source: "source_c",
+        tags: "business",
     },
 
     {
@@ -57,6 +57,7 @@ const getRandomQuote = () => {
 
 console.log(getRandomQuote());
 
+// Picked colors that may compliment to existing color palette and design, instead of generating truly random colors with RBG
 let pickedColors = [
     {
       color: "#F83839",
@@ -71,11 +72,11 @@ let pickedColors = [
     },
 
     {
-      color: "#C8F4F9",
+      color: "#170B3B",
     },
 
     {
-      color: "#EFEBE2",
+      color: "#432F70",
     },
 
     {
@@ -92,11 +93,12 @@ console.log(pickedColors.length);
 // color generation function
 const randColorGen = ( ) => {
     let colorGen = Math.floor(Math.random() * pickedColors.length);
-    let colorMaker = document.querySelector("body");
-    return colorMaker.style.backgroundColor = pickedColors[colorGen].color;
+    return document.querySelector("body").style.backgroundColor = pickedColors[colorGen].color;
 };
 
-
+let autoQuote = () => {
+    setInterval(printQuote, 3000);
+};
 /***
  * `printQuote` function
 ***/
@@ -105,21 +107,32 @@ const printQuote = () => {
     // Calls getRandomQuote function
     let pullRandQuote = getRandomQuote();
     let quoteMsg = `<p class="quote"> A random quote: ${pullRandQuote.quote} </p>
-<p class="source"> Quote source: ${pullRandQuote.source} 
-    `; // Close the P tag above
+<p class="source"> Quote Source: ${pullRandQuote.source} |
+    `;
     if ( pullRandQuote.citation ) {
-        quoteMsg += `<span class="citation"> quote citation: ${pullRandQuote.citation}</span>`;
+        quoteMsg += `<span class="citation"> Quote Citation: ${pullRandQuote.citation} |</span>`;
     } if ( pullRandQuote.year ) {
-        quoteMsg += `<span class="year"> quote year: ${pullRandQuote.year}</span>`;
+        quoteMsg += `<span class="year"> Quote Year: ${pullRandQuote.year} |</span>`;
+    } if ( pullRandQuote.tags ) {
+        quoteMsg += `<span class="tags"> Quote Type: ${pullRandQuote.tags}</span>`;
     }
     quoteMsg += `</p>`;
     console.log(quoteMsg);
+    // Background color changes to a pre-determined random color each time the quote refreshes
     randColorGen();
-    return document.getElementById('quote-box').innerHTML = `${quoteMsg}`;
+    // autoQuote();
+    document.getElementById("quote-box").innerHTML = quoteMsg;
 };
+// Calling the printQuote function so we can generate a new quote before user clicks on button
+printQuote();
+
+// Refreshing the quotes every 10 seconds by calling the printQuote function
+let autoRotate = window.setInterval(printQuote, 10000);
+
+
 /***
  * click event listener for the print quote button
  * DO NOT CHANGE THE CODE BELOW!!
 ***/
 
-document.getElementById('load-quote').addEventListener("click", printQuote, false);
+document.getElementById("load-quote").addEventListener("click", printQuote, false);
